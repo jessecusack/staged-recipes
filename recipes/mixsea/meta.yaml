@@ -1,0 +1,46 @@
+{% set name = "mixsea" %}
+{% set version = "2.0.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: [sha]
+
+build:
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - python
+    - pip
+    - pytest-runner
+  run:
+    - numpy
+    - scipy
+    - gsw
+
+test:
+  imports:
+    - mixsea
+
+about:
+  home: https://github.com/modscripps/mixsea
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: 'Ocean mixing parameterizations in python'
+
+  description: |
+    A collection of functions for estimating turbulence quantities from in situ
+    oceanographic data, including the Thorpe ccale and finescale methods.
+  dev_url: https://github.com/modscripps/mixsea
+
+extra:
+  recipe-maintainers:
+    - jessecusack
+    - gunnarvoet
